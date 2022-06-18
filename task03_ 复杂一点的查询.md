@@ -81,7 +81,7 @@ SELECT product_type, COUNT(*)
   FROM product
  GROUP BY product_type ;
 ```
-![image-20220617101905053](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617101905053.png)
+![image-20220617101905053](./img/task03/image-20220617101905053.png)
 
 创建的视图如下图所示：
 
@@ -124,7 +124,7 @@ SELECT product_type, sale_price, shop_name
        shop_product
  WHERE product.product_id = shop_product.product_id;
 ```
-![image-20220617102402563](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617102402563.png)
+![image-20220617102402563](./img/task03/image-20220617102402563.png)
 
 创建的视图如下图所示
 
@@ -140,7 +140,7 @@ SELECT sale_price, shop_name
 ```
 查询结果为：
 
-![image-20220617102817148](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617102817148.png)
+![image-20220617102817148](./img/task03/image-20220617102817148.png)
 
 ![图片](./img/ch03/ch03.05result.png)
 
@@ -167,7 +167,7 @@ ALTER VIEW productSum
 ```
 此时productSum视图内容如下图所示
 
-![image-20220617121218292](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617121218292.png)
+![image-20220617121218292](./img/task03/image-20220617121218292.png)
 
 ![图片](./img/ch03/ch03.06productsum.png)
 
@@ -197,7 +197,7 @@ UPDATE productsum
 ```
 此时我们再查看productSum视图，可以发现数据已经更新了
 
-![image-20220617122652281](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617122652281.png)
+![image-20220617122652281](./img/task03/image-20220617122652281.png)
 
 ![图片](./img/ch03/ch03.07productsum2.png)
 
@@ -298,7 +298,7 @@ SELECT product_id, product_name, sale_price
   FROM product
  WHERE sale_price > (SELECT AVG(sale_price) FROM product);
 ```
-![image-20220617123402262](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617123402262.png)
+![image-20220617123402262](./img/task03/image-20220617123402262.png)
 
 上面的这条语句首先后半部分查询出product表中的平均售价，前面的sql语句在根据WHERE条件挑选出合适的商品。
 由于标量子查询的特性，导致标量子查询不仅仅局限于 WHERE 子句中，通常任何可以使用**单一值**的位置都可以使用。也就是说， 能够使用常数或者列名的地方，无论是 SELECT 子句、GROUP BY 子句、HAVING 子句，还是 ORDER BY 子句，几乎所有的地方都可以使用。
@@ -315,7 +315,7 @@ SELECT product_id,
 ```
 你能猜到这段代码的运行结果是什么吗？运行一下看看与你想象的结果是否一致。
 
-![image-20220617123625586](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617123625586.png)
+![image-20220617123625586](./img/task03/image-20220617123625586.png)
 
 ## 3.2.6 关联子查询
 
@@ -357,7 +357,7 @@ SELECT product_type, product_name, sale_price
                       WHERE p1.product_type =p2.product_type
    GROUP BY product_type);
 ```
-![image-20220617124130120](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617124130120.png)
+![image-20220617124130120](./img/task03/image-20220617124130120.png)
 
 可以看出上面这两个语句的区别吗？
 
@@ -408,7 +408,7 @@ where sale_price >= 1000 and regist_date = '2009-09-20';
 
 
 
-![image-20220617153240203](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617153240203.png)
+![image-20220617153240203](./img/task03/image-20220617153240203.png)
 
 ## 3.2
 
@@ -417,7 +417,7 @@ where sale_price >= 1000 and regist_date = '2009-09-20';
 ```sql
 INSERT INTO ViewPractice5_1 VALUES (' 刀子 ', 300, '2009-11-02');
 ```
-![image-20220617153406232](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617153406232.png)
+![image-20220617153406232](./img/task03/image-20220617153406232.png)
 
 ## 3.3
 
@@ -552,7 +552,7 @@ FROM samplemath;
 +----------+---------+------+------+---------+-----------+
 11 rows in set (0.08 sec)
 ```
-![image-20220617181737000](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617181737000.png)
+![image-20220617181737000](./img/task03/image-20220617181737000.png)
 
 ## 3.3.2 字符串函数
 
@@ -626,7 +626,7 @@ LOWER 函数只能针对英文字母使用，它会将参数中的字符串全�
 
 使用 SUBSTRING 函数 可以截取出字符串中的一部分字符串。截取的起始位置从字符串最左侧开始计算，索引值起始为1。
 
-![image-20220617182449578](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182449578.png)
+![image-20220617182449578](./img/task03/image-20220617182449578.png)
 
 ![图片](./img/ch03/ch03.10function.png)
 
@@ -652,7 +652,7 @@ SELECT SUBSTRING_INDEX('www.mysql.com', '.', -2);
 +-------------------------------------------+
 1 row in set (0.00 sec)
 ```
-![image-20220617182716433](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182716433.png)
+![image-20220617182716433](./img/task03/image-20220617182716433.png)
 
 获取第1个元素比较容易，获取第2个元素/第n个元素可以采用二次拆分的写法。
 
@@ -673,7 +673,7 @@ SELECT SUBSTRING_INDEX(SUBSTRING_INDEX('www.mysql.com', '.', 2), '.', -1);
 1 row in set (0.00 sec)
 ```
 
-![image-20220617182704002](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182704002.png)
+![image-20220617182704002](./img/task03/image-20220617182704002.png)
 
 * **（扩展内容）REPEAT -- 字符串按需重复多次**
 
@@ -696,7 +696,7 @@ mysql> SELECT REPEAT('加油！',3);
 不同DBMS的日期函数语法各有不同，本课程介绍一些被标准 SQL 承认的可以应用于绝大多数 DBMS 的函数。特定DBMS的日期函数查阅文档即可。
 
 * CURRENT_DATE -- 获取当前日期
-* ![image-20220617182753932](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182753932.png)
+* ![image-20220617182753932](./img/task03/image-20220617182753932.png)
 ```sql
 SELECT CURRENT_DATE;
 +--------------+
@@ -707,7 +707,7 @@ SELECT CURRENT_DATE;
 1 row in set (0.00 sec)
 ```
 * CURRENT_TIME -- 当前时间
-* ![image-20220617182811440](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182811440.png)
+* ![image-20220617182811440](./img/task03/image-20220617182811440.png)
 ```sql
 SELECT CURRENT_TIME;
 +--------------+
@@ -718,7 +718,7 @@ SELECT CURRENT_TIME;
 1 row in set (0.00 sec)
 ```
 * CURRENT_TIMESTAMP -- 当前日期和时间
-* ![image-20220617182838078](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182838078.png)
+* ![image-20220617182838078](./img/task03/image-20220617182838078.png)
 ```sql
 SELECT CURRENT_TIMESTAMP;
 +---------------------+
@@ -751,7 +751,7 @@ EXTRACT(SECOND FROM CURRENT_TIMESTAMP) AS second;
 +---------------------+------+-------+------+------+--------+--------+
 1 row in set (0.00 sec)
 ```
-![image-20220617182925189](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617182925189.png)
+![image-20220617182925189](./img/task03/image-20220617182925189.png)
 
 ## 3.3.4 转换函数
 
@@ -761,9 +761,9 @@ EXTRACT(SECOND FROM CURRENT_TIMESTAMP) AS second;
 
 语法：`CAST（转换前的值 AS 想要转换的数据类型）`
 
-![image-20220617183007499](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617183007499.png)
+![image-20220617183007499](./img/task03/image-20220617183007499.png)
 
-![image-20220617183036832](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617183036832.png)
+![image-20220617183036832](./img/task03/image-20220617183036832.png)
 
 ```sql
 -- 将字符串类型转换为数值类型
@@ -803,7 +803,7 @@ COALESCE(NULL, NULL, '2020-11-01') AS col_3;
 1 row in set (0.00 sec)
 ```
 
-![image-20220617183207870](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220617183207870.png)
+![image-20220617183207870](./img/task03/image-20220617183207870.png)
 
 # 3.4 谓词
 
@@ -872,7 +872,7 @@ WHERE strcol LIKE 'ddd%';
 ```
 其中的`%`是代表“**零个或多个任意字符串**”的特殊符号，本例中代表“以ddd开头的所有字符串”。
 
-![image-20220618110114802](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618110114802.png)
+![image-20220618110114802](./img/task03/image-20220618110114802.png)
 
 * 中间一致：选取出“abcddd”“dddabc”“abdddc”
 
@@ -893,7 +893,7 @@ WHERE strcol LIKE '%ddd%';
 +--------+
 3 rows in set (0.00 sec)
 ```
-![image-20220618110216691](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618110216691.png)
+![image-20220618110216691](./img/task03/image-20220618110216691.png)
 
 * 后方一致：选取出“abcddd“
 
@@ -947,7 +947,7 @@ WHERE sale_price BETWEEN 100 AND 1000;
 +--------------+------------+
 5 rows in set (0.00 sec)
 ```
-![image-20220618140955950](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618140955950.png)
+![image-20220618140955950](./img/task03/image-20220618140955950.png)
 
 BETWEEN 的特点就是结果中会包含 100 和 1000 这两个临界值，也就是闭区间。如果不想让结果中包含临界值，那就必须使用 < 和 >。
 
@@ -982,7 +982,7 @@ WHERE purchase_price IS NULL;
 +--------------+----------------+
 2 rows in set (0.00 sec)
 ```
-![image-20220618141033674](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141033674.png)
+![image-20220618141033674](./img/task03/image-20220618141033674.png)
 
 与此相反，想要选取 NULL 以外的数据时，需要使用IS NOT NULL。
 
@@ -1003,7 +1003,7 @@ WHERE purchase_price IS NOT NULL;
 6 rows in set (0.00 sec)
 ```
 
-![image-20220618141100422](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141100422.png)
+![image-20220618141100422](./img/task03/image-20220618141100422.png)
 
 ## 3.4.5 IN谓词 -- OR的简便用法
 
@@ -1041,7 +1041,7 @@ WHERE purchase_price IN (320, 500, 5000);
 +--------------+----------------+
 3 rows in set (0.00 sec)
 ```
-![image-20220618141708564](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141708564.png)
+![image-20220618141708564](./img/task03/image-20220618141708564.png)
 
 上述语句简洁了很多，可读性大幅提高。
 反之，希望选取出“进货单价不是 320 元、 500 元、 5000 元”的商品时，可以使用否定形式NOT IN来实现。
@@ -1062,7 +1062,7 @@ WHERE purchase_price NOT IN (320, 500, 5000);
 需要注意的是，在使用IN 和 NOT IN 时是无法选取出NULL数据的。
 实际结果也是如此，上述两组结果中都不包含进货单价为 NULL 的叉子和圆珠笔。 NULL 只能使用 IS NULL 和 IS NOT NULL 来进行判断。
 
-![image-20220618141729739](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141729739.png)
+![image-20220618141729739](./img/task03/image-20220618141729739.png)
 
 ## 3.4.6 使用子查询作为IN谓词的参数
 
@@ -1160,7 +1160,7 @@ WHERE product_id IN (SELECT product_id
 +--------------+------------+
 4 rows in set (0.00 sec)
 ```
-![image-20220618142619114](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618142619114.png)
+![image-20220618142619114](./img/task03/image-20220618142619114.png)
 
 根据第5章学习的知识，子查询是从最内层开始执行的（由内而外），因此，上述语句的子查询执行之后，sql 展开成下面的语句
 
@@ -1211,7 +1211,7 @@ SELECT product_name, sale_price
 5 rows in set (0.00 sec)
 ```
 
-![image-20220618142724750](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618142724750.png)
+![image-20220618142724750](./img/task03/image-20220618142724750.png)
 
 ## 3.4.7 EXIST 谓词
 
@@ -1254,7 +1254,7 @@ SELECT product_name, sale_price
 +--------------+------------+
 4 rows in set (0.00 sec)
 ```
-![image-20220618151412967](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618151412967.png)
+![image-20220618151412967](./img/task03/image-20220618151412967.png)
 
 * EXIST的参数
 
@@ -1291,7 +1291,7 @@ SELECT product_name, sale_price
 4 rows in set (0.00 sec)
 ```
 >大家可以把在 EXIST 的子查询中书写 SELECT * 当作 SQL 的一种习惯。
-![image-20220618162137400](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618162137400.png)
+![image-20220618162137400](./img/task03/image-20220618162137400.png)
 
 * 使用NOT EXIST替换NOT IN
 
@@ -1378,7 +1378,7 @@ SELECT  product_name,
 +--------------+------------------+
 8 rows in set (0.00 sec)
 ```
-![image-20220618164151200](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618164151200.png)
+![image-20220618164151200](./img/task03/image-20220618164151200.png)
 
 ELSE 子句也可以省略不写，这时会被默认为 ELSE NULL。但为了防止有人漏读，还是希望大家能够显式地写出 ELSE 子句。
 此外， CASE 表达式最后的“END”是不能省略的，请大家特别注意不要遗漏。忘记书写 END 会发生语法错误，这也是初学时最容易犯的错误。
@@ -1421,7 +1421,7 @@ SELECT SUM(CASE WHEN product_type = '衣服' THEN sale_price ELSE 0 END) AS sum_
 +-------------------+-------------------+------------------+
 1 row in set (0.00 sec)
 ```
-![image-20220618164904422](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618164904422.png)
+![image-20220618164904422](./img/task03/image-20220618164904422.png)
 
 * **（扩展内容）应用场景3：实现行转列**
 
