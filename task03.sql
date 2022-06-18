@@ -183,3 +183,112 @@ SELECT CAST('2009-12-14' AS DATE) AS date_col;
 SELECT COALESCE(NULL, 11) AS col_1,
 COALESCE(NULL, 'hello world', NULL) AS col_2,
 COALESCE(NULL, NULL, '2020-11-01') AS col_3;
+
+drop TABLE samplelike1;
+-- DDL ：创建表
+CREATE TABLE samplelike1
+( strcol VARCHAR(6) NOT NULL,
+  PRIMARY KEY (strcol)
+);
+-- DML ：插入数据
+START TRANSACTION; -- 开始事务
+INSERT INTO samplelike1 (strcol) VALUES ('abcddd');
+INSERT INTO samplelike1 (strcol) VALUES ('dddabc');
+INSERT INTO samplelike1 (strcol) VALUES ('abdddc');
+INSERT INTO samplelike1 (strcol) VALUES ('abcdd');
+INSERT INTO samplelike1 (strcol) VALUES ('ddabc');
+INSERT INTO samplelike1 (strcol) VALUES ('abddc');
+COMMIT; -- 提交事务
+
+SELECT * FROM samplelike1;
+
+select *
+from samplelike1
+where strcol like 'ddd%';
+
+select *
+from samplelike1
+where strcol LIKE '%ddd%';
+
+select product_name,sale_price
+from product
+where sale_price BETWEEN 100 and 1000;
+
+SELECT product_name, purchase_price
+FROM product
+WHERE purchase_price IS NULL;
+
+SELECT product_name, purchase_price
+FROM product
+WHERE purchase_price IS NOT NULL;
+
+select product_name,purchase_price
+from product
+where purchase_price in (320,500,5000);
+
+SELECT product_name, purchase_price
+FROM product
+WHERE purchase_price NOT IN (320, 500, 5000);
+
+SELECT * FROM shopproduct;
+
+select product_name, sale_price
+from product
+where product_id in (
+  select product_id
+  from shopproduct
+  where shop_id = '000C'
+);
+
+SELECT product_name, sale_price
+  FROM product
+ WHERE product_id NOT IN (SELECT product_id
+                            FROM shopproduct
+                           WHERE shop_id = '000A');
+
+select product_name,sale_price
+from product as p
+where exists(
+  select *
+  from shopproduct as sp
+  where sp.shop_id = '000C'
+  and sp.product_id = p.product_id
+);
+
+select product_name, sale_price
+from product as p
+where exists(
+  SELECT 1
+  from shopproduct as sp
+  where sp.shop_id = '000C'
+  and sp.product_id = p.product_id
+);
+
+select product_name,sale_price
+from product as p
+where not exists(
+  select *
+  from shopproduct as sp
+  where sp.shop_id = '000A'
+  and sp.product_id = p.product_id
+);
+
+SELECT product_name,
+case when product_type = '衣服' then CONCAT('A:',product_type)
+     when product_type = '办公用品' then CONCAT('B:',product_type)
+     when product_type = '厨房用品' then CONCAT('C:',product_type)
+     else NULL
+end as abc_product_type
+from product;
+
+select product_type,sum(sale_price) as sum_price
+from product
+GROUP BY product_type;
+
+select
+sum(case when product_type='衣服' then sale_price else 0 end) as sum_price_clothes,
+sum(case when product_type='厨房用具' then sale_price else 0 end) as sum_price_kitchen,
+sum(case when product_type='办公用品' then sale_price else 0 end) as sum_price_office
+from product;
+
+select 

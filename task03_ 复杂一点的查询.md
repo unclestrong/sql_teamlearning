@@ -809,7 +809,7 @@ COALESCE(NULL, NULL, '2020-11-01') AS col_3;
 
 ## 3.4.1 什么是谓词
 
-谓词就是返回值为真值的函数。包括`TRUE / FALSE / UNKNOWN`。
+谓词就是**返回值为真值的函数**。包括`TRUE / FALSE / UNKNOWN`。
 
 谓词主要有以下几个：
 
@@ -870,7 +870,10 @@ WHERE strcol LIKE 'ddd%';
 +--------+
 1 row in set (0.00 sec)
 ```
-其中的`%`是代表“零个或多个任意字符串”的特殊符号，本例中代表“以ddd开头的所有字符串”。
+其中的`%`是代表“**零个或多个任意字符串**”的特殊符号，本例中代表“以ddd开头的所有字符串”。
+
+![image-20220618110114802](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618110114802.png)
+
 * 中间一致：选取出“abcddd”“dddabc”“abdddc”
 
 中间一致即查询对象字符串中含有作为查询条件的字符串，无论该字符串出现在对象字
@@ -890,6 +893,8 @@ WHERE strcol LIKE '%ddd%';
 +--------+
 3 rows in set (0.00 sec)
 ```
+![image-20220618110216691](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618110216691.png)
+
 * 后方一致：选取出“abcddd“
 
 后方一致即作为查询条件的字符串（这里是“ddd”）与查询对象字符串的末尾部分相同。
@@ -942,7 +947,10 @@ WHERE sale_price BETWEEN 100 AND 1000;
 +--------------+------------+
 5 rows in set (0.00 sec)
 ```
+![image-20220618140955950](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618140955950.png)
+
 BETWEEN 的特点就是结果中会包含 100 和 1000 这两个临界值，也就是闭区间。如果不想让结果中包含临界值，那就必须使用 < 和 >。
+
 ```sql
 SELECT product_name, sale_price
 FROM product
@@ -974,7 +982,10 @@ WHERE purchase_price IS NULL;
 +--------------+----------------+
 2 rows in set (0.00 sec)
 ```
+![image-20220618141033674](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141033674.png)
+
 与此相反，想要选取 NULL 以外的数据时，需要使用IS NOT NULL。
+
 ```sql
 SELECT product_name, purchase_price
 FROM product
@@ -992,9 +1003,11 @@ WHERE purchase_price IS NOT NULL;
 6 rows in set (0.00 sec)
 ```
 
+![image-20220618141100422](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141100422.png)
+
 ## 3.4.5 IN谓词 -- OR的简便用法
 
-多个查询条件取并集时可以选择使用`or`语句。
+**多个查询条件**取并集时可以选择使用`or`语句。
 
 ```sql
 -- 通过OR指定多个进货单价进行查询
@@ -1028,6 +1041,8 @@ WHERE purchase_price IN (320, 500, 5000);
 +--------------+----------------+
 3 rows in set (0.00 sec)
 ```
+![image-20220618141708564](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141708564.png)
+
 上述语句简洁了很多，可读性大幅提高。
 反之，希望选取出“进货单价不是 320 元、 500 元、 5000 元”的商品时，可以使用否定形式NOT IN来实现。
 
@@ -1047,11 +1062,13 @@ WHERE purchase_price NOT IN (320, 500, 5000);
 需要注意的是，在使用IN 和 NOT IN 时是无法选取出NULL数据的。
 实际结果也是如此，上述两组结果中都不包含进货单价为 NULL 的叉子和圆珠笔。 NULL 只能使用 IS NULL 和 IS NOT NULL 来进行判断。
 
+![image-20220618141729739](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618141729739.png)
+
 ## 3.4.6 使用子查询作为IN谓词的参数
 
 * IN和子查询
 
-IN 谓词（NOT IN 谓词）具有其他谓词所没有的用法，那就是可以使用子查询作为其参数。我们已经在 5-2 节中学习过了，子查询就是 SQL内部生成的表，因此也可以说“能够将表作为 IN 的参数”。同理，我们还可以说“能够将视图作为 IN 的参数”。
+IN 谓词（NOT IN 谓词）具有其他谓词所没有的用法，那就是可以**使用子查询作为其参数**。我们已经在 5-2 节中学习过了，子查询就是 SQL内部生成的表，因此也可以说“能够将**表作为 IN 的参数**”。同理，我们还可以说“能够将**视图作为 IN 的参数**”。
 
 在此，我们创建一张新表`shopproduct`显示出哪些商店销售哪些商品。
 
@@ -1143,7 +1160,10 @@ WHERE product_id IN (SELECT product_id
 +--------------+------------+
 4 rows in set (0.00 sec)
 ```
+![image-20220618142619114](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618142619114.png)
+
 根据第5章学习的知识，子查询是从最内层开始执行的（由内而外），因此，上述语句的子查询执行之后，sql 展开成下面的语句
+
 ```sql
 -- 子查询展开后的结果
 SELECT product_name, sale_price
@@ -1191,6 +1211,8 @@ SELECT product_name, sale_price
 5 rows in set (0.00 sec)
 ```
 
+![image-20220618142724750](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618142724750.png)
+
 ## 3.4.7 EXIST 谓词
 
 EXIST 谓词的用法理解起来有些难度。
@@ -1232,9 +1254,11 @@ SELECT product_name, sale_price
 +--------------+------------+
 4 rows in set (0.00 sec)
 ```
+![image-20220618151412967](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618151412967.png)
+
 * EXIST的参数
 
-之前我们学过的谓词，基本上都是像“列 LIKE 字符串”或者“ 列 BETWEEN 值 1 AND 值 2”这样需要指定 2 个以上的参数，而 EXIST 的左侧并没有任何参数。因为 EXIST 是只有 1 个参数的谓词。 所以，EXIST 只需要在右侧书写 1 个参数，该参数通常都会是一个子查询。
+之前我们学过的谓词，基本上都是像“列 LIKE 字符串”或者“ 列 BETWEEN 值 1 AND 值 2”这样需要指定 2 个以上的参数，而 EXIST 的左侧并没有任何参数。因为 EXIST 是**只有 1 个参数的谓词**。 所以，EXIST 只需要在右侧书写 1 个参数，该参数通常都会是一个子查询。
 
 ```sql
 (SELECT *
@@ -1242,12 +1266,10 @@ SELECT product_name, sale_price
   WHERE sp.shop_id = '000C'
     AND sp.product_id = p.product_id)  
 ```
-上面这样的子查询就是唯一的参数。确切地说，由于通过条件“SP.product_id = P.product_id”将 product 表和 shopproduct表进行了联接，因此作为参数的是关联子查询。 EXIST 通常会使用关联子查询作为参数。
+上面这样的子查询就是唯一的参数。确切地说，由于通过条件“SP.product_id = P.product_id”将 product 表和 shopproduct表进行了联接，因此作为参数的是关联子查询。 EXIST 通常会使用**关联子查询作为参数**。
 * 子查询中的SELECT *
 
-由于 EXIST 只关心记录是否存在，因此返回哪些列都没有关系。 EXIST 只会判断是否存在满足子查询中 WHERE 子句指定的条件“商店编号（shop_id）为 '000C'，商品（product）表和商店
-
-商品（shopproduct）表中商品编号（product_id）相同”的记录，只有存在这样的记录时才返回真（TRUE）。
+由于 EXIST 只关心记录**是否存在**，因此返回哪些列都没有关系。 EXIST 只会判断是否存在满足子查询中 WHERE 子句指定的条件“商店编号（shop_id）为 '000C'，商品（product）表和商店商品（shopproduct）表中商品编号（product_id）相同”的记录，只有存在这样的记录时才返回真（TRUE）。
 
 因此，使用下面的查询语句，查询结果也不会发生变化。
 
@@ -1269,6 +1291,8 @@ SELECT product_name, sale_price
 4 rows in set (0.00 sec)
 ```
 >大家可以把在 EXIST 的子查询中书写 SELECT * 当作 SQL 的一种习惯。
+![image-20220618162137400](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618162137400.png)
+
 * 使用NOT EXIST替换NOT IN
 
 就像 EXIST 可以用来替换 IN 一样， NOT IN 也可以用NOT EXIST来替换。
@@ -1318,7 +1342,7 @@ ELSE <表达式>
 END  
 ```
 上述语句执行时，依次判断 when 表达式是否为真值，是则执行 THEN 后的语句，如果所有的 when 表达式均为假，则执行 ELSE 后的语句。
-无论多么庞大的 CASE 表达式，最后也只会返回一个值。
+无论多么庞大的 CASE 表达式，最后也**只会返回一个值**。
 
 ## 3.5.2 CASE表达式的使用方法
 
@@ -1354,12 +1378,14 @@ SELECT  product_name,
 +--------------+------------------+
 8 rows in set (0.00 sec)
 ```
+![image-20220618164151200](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618164151200.png)
+
 ELSE 子句也可以省略不写，这时会被默认为 ELSE NULL。但为了防止有人漏读，还是希望大家能够显式地写出 ELSE 子句。
 此外， CASE 表达式最后的“END”是不能省略的，请大家特别注意不要遗漏。忘记书写 END 会发生语法错误，这也是初学时最容易犯的错误。
 
 * **应用场景2：实现列方向上的聚合**
 
-通常我们使用如下代码实现行的方向上不同种类的聚合（这里是 sum）
+通常我们使用如下代码实现**行的方向**上不同种类的聚合（这里是 sum）
 
 ```sql
 SELECT product_type,
@@ -1375,7 +1401,7 @@ SELECT product_type,
 +--------------+-----------+
 3 rows in set (0.00 sec)
 ```
-假如要在列的方向上展示不同种类额聚合值，该如何写呢？
+假如要在**列的方向**上展示不同种类额聚合值，该如何写呢？
 ```plain
 sum_price_clothes | sum_price_kitchen | sum_price_office
 ------------------+-------------------+-----------------
@@ -1395,6 +1421,8 @@ SELECT SUM(CASE WHEN product_type = '衣服' THEN sale_price ELSE 0 END) AS sum_
 +-------------------+-------------------+------------------+
 1 row in set (0.00 sec)
 ```
+![image-20220618164904422](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220618164904422.png)
+
 * **（扩展内容）应用场景3：实现行转列**
 
 假设有如下图表的结构
@@ -1450,6 +1478,8 @@ SELECT name,
 
 四则运算中含有 NULL 时（不进行特殊处理的情况下），运算结果是否必然会变为NULL ？
 
+- 是
+
 ## 3.6
 
 对本章中使用的 `product`（商品）表执行如下 2 条 `SELECT` 语句，能够得到什么样的结果呢？
@@ -1461,12 +1491,17 @@ SELECT product_name, purchase_price
   FROM product
  WHERE purchase_price NOT IN (500, 2800, 5000);
 ```
+- product表中采购价格不是500，2800，5000的商品名称和采购价格
+
 ②
+
 ```sql
 SELECT product_name, purchase_price
   FROM product
  WHERE purchase_price NOT IN (500, 2800, 5000, NULL);
 ```
+- null
+
 ## 3.7
 
 按照销售单价( `sale_price` )对练习 3.6 中的 `product`（商品）表中的商品进行如下分类。
@@ -1484,3 +1519,14 @@ low_price | mid_price | high_price
 ----------+-----------+------------
         5 |         1 |         2
 ```
+
+
+
+```sql
+ SELECT
+ count(case when sale_price <= 1000 then sale_price else 0 end)as low_price,
+ count(case when sale_price > 1000 and sale_price <= 3000 then sale_price else 0 end) as mid_price,
+ count(case when sale_price > 3000 then sale_price else 0 end) as high_price
+ from product;
+```
+
