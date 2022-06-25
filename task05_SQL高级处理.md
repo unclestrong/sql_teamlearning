@@ -177,7 +177,7 @@ ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING：
 
 ## 5.4.1 ROLLUP - 计算合计及小计
 
-常规的GROUP BY 只能得到每个分类的小计，有时候还需要计算分类的合计，可以用 ROLLUP关键字。
+常规的GROUP BY 只能得到每个分类的小计，有时候还需要计算**分类的合计**，可以用 ROLLUP关键字。
 
 ```sql
 SELECT  product_type
@@ -379,9 +379,19 @@ SELECT  product_id
        ,MAX(sale_price) OVER (ORDER BY product_id) AS Current_max_price
   FROM product;
 ```
+当前售价的最高售价 放在current_max_price这一字段
+
 ## **5.2**
 
 继续使用product表，计算出按照登记日期（regist_date）升序进行排列的各日期的销售单价（sale_price）的总额。排序是需要将登记日期为NULL 的“运动 T 恤”记录排在第 1 位（也就是将其看作比其他日期都早）
+
+```sql
+select product_id,product_name,sale_price,regist_date,
+        sum(sale_price) over (order by regist_date) as current_sum_price
+    from product;
+```
+
+
 
 ## **5.3**
 
@@ -389,7 +399,14 @@ SELECT  product_id
 
 ① 窗口函数不指定PARTITION BY的效果是什么？
 
+- 如果不指定 PARTITION BY ，则**不对数据进行分区**
+- ![image-20220625113029423](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220625113029423.png)
+- ![image-20220625113117800](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220625113117800.png)
+
 ② 为什么说窗口函数只能在SELECT子句中使用？实际上，在ORDER BY 子句使用系统并不会报错。
+
+- 窗口函数是对WHERE或者GROUP BY子句处理后的结果进行操作，所以窗口函数原则上只能写在SELECT子句中。
+  ORDER BY子句中能够使用窗口函数的原因（UPDATE的SET子句中也能够使用窗口函数）是因为ORDER BY子句会在SELECT子句之后执行，并且记录也不会减少。
 
 ## **5.4**
 
