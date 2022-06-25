@@ -37,7 +37,7 @@ SELECT product_name
 
 ![图片](./img/ch05/ch0501.png)
 
-![image-20220624222739372](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220624222739372.png)
+![image-20220624222739372](./img/task05/image-20220624222739372.png)
 
 我们先忽略生成的新列 - [ranking]， 看下原始数据在PARTITION BY 和 ORDER BY 关键字的作用下发生了什么变化。
 
@@ -94,7 +94,7 @@ SELECT  product_name
 
 ![图片](./img/ch05/ch0503.png)
 
-![image-20220624223322888](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220624223322888.png)
+![image-20220624223322888](./img/task05/image-20220624223322888.png)
 
 ## 5.2.2 聚合函数在窗口函数上的使用
 
@@ -119,7 +119,7 @@ SELECT  product_id
 
 可以看出，聚合函数结果是，按我们指定的排序，这里是product_id，**当前所在行及之前所有的行**的合计或均值。即累计到当前行的聚合。
 
-![image-20220624223748331](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220624223748331.png)
+![image-20220624223748331](./img/task05/image-20220624223748331.png)
 
 
 # 5.3 窗口函数的的应用 - 计算移动平均
@@ -167,7 +167,7 @@ ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING：
 
 ![图片](./img/ch05/ch0507.png)
 
-![image-20220624224406767](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220624224406767.png)
+![image-20220624224406767](./img/task05/image-20220624224406767.png)
 
 ## 5.3.1 窗口函数适用范围和注意事项
 
@@ -400,8 +400,8 @@ select product_id,product_name,sale_price,regist_date,
 ① 窗口函数不指定PARTITION BY的效果是什么？
 
 - 如果不指定 PARTITION BY ，则**不对数据进行分区**
-- ![image-20220625113029423](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220625113029423.png)
-- ![image-20220625113117800](C:\Users\10131\AppData\Roaming\Typora\typora-user-images\image-20220625113117800.png)
+- ![image-20220625113029423](./img/task05/image-20220625113029423.png)
+- ![image-20220625113117800](./img/task05/image-20220625113117800.png)
 
 ② 为什么说窗口函数只能在SELECT子句中使用？实际上，在ORDER BY 子句使用系统并不会报错。
 
